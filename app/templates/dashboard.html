@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Inicio · Gestor Seguro{% endblock %}
+{% block content %}
+<p class="eyebrow">ESPACIO DE TRABAJO</p><h1>Todo en orden. Todo a tu alcance.</h1>
+<p class="text-secondary">Hola, {{ g.user['username'] }}. Este es el resumen de tu archivo privado.</p>
+<div class="row g-4 my-2">
+  <div class="col-md-6"><section class="card summary-card"><div class="card-body"><p class="eyebrow">NOTAS PRIVADAS</p><p class="metric">{{ notes_count }}</p><h2 class="h5">Ideas bajo llave</h2><p class="text-secondary">Contenido cifrado con AES-256-GCM.</p>{% if 'notes.create' in current_app.view_functions %}<a class="btn btn-primary" href="{{ url_for('notes.create') }}">Crear una nota</a>{% endif %}</div></section></div>
+  <div class="col-md-6"><section class="card summary-card"><div class="card-body"><p class="eyebrow">DOCUMENTOS FIRMADOS</p><p class="metric">{{ documents_count }}</p><h2 class="h5">Integridad comprobable</h2><p class="text-secondary">Firma y verificación con Ed25519.</p>{% if 'documents.upload' in current_app.view_functions %}<a class="btn btn-primary" href="{{ url_for('documents.upload') }}">Cargar documento</a>{% endif %}</div></section></div>
+</div>
+<section class="info-panel mt-4"><h2 class="h5">Dos formas de proteger tu información</h2><p>El cifrado protege el contenido de tus notas en SQLite. La firma permite detectar cambios en tus documentos: los archivos firmados se guardan sin cifrar.</p><p class="small mb-0">Usa únicamente datos ficticios para esta demostración académica.</p></section>
+{% endblock %}

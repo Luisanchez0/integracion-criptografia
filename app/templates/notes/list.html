@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block title %}Notas privadas · Gestor Seguro{% endblock %}
+{% block content %}
+<div class="page-heading"><div><p class="eyebrow">AES-256-GCM</p><h1>Notas privadas</h1><p class="text-secondary">Tus ideas, cifradas antes de guardarse.</p></div><a class="btn btn-primary" href="{{ url_for('notes.create') }}">Crear una nota</a></div>
+{% if notes %}<div class="card"><div class="table-responsive"><table class="table align-middle mb-0"><caption class="visually-hidden">Tus notas privadas; fechas en UTC</caption><thead><tr><th>Título</th><th>Actualización (UTC)</th><th>Protección</th><th>Acciones</th></tr></thead><tbody>{% for note in notes %}<tr><td class="filename"><a class="fw-semibold" href="{{ url_for('notes.detail', note_id=note['id']) }}">{{ note['title'] }}</a></td><td class="text-nowrap">{{ note['updated_at'] }}</td><td><span class="badge crypto-badge">AES-256-GCM</span></td><td><a class="btn btn-outline-secondary btn-sm" href="{{ url_for('notes.edit', note_id=note['id']) }}">Editar</a> <a class="btn btn-outline-danger btn-sm" href="{{ url_for('notes.delete', note_id=note['id']) }}">Eliminar</a></td></tr>{% endfor %}</tbody></table></div></div>
+{% else %}<section class="empty-state"><div class="empty-icon" aria-hidden="true">01</div><h2 class="h4">Tu primera idea empieza aquí</h2><p class="text-secondary">Todavía no tienes notas. Crea una para probar el cifrado y recuperarla cuando la necesites.</p><a class="btn btn-primary" href="{{ url_for('notes.create') }}">Crear mi primera nota</a></section>{% endif %}
+<p class="small text-secondary mt-3">Solo el contenido está cifrado. Los títulos y las fechas se guardan visibles; evita incluir información sensible en el título.</p>
+{% endblock %}

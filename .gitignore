@@ -1,0 +1,27 @@
+# Entorno, llaves y credenciales locales
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+instance/*
+!instance/.gitkeep
+storage/*
+!storage/.gitkeep
+# Entornos y artefactos de desarrollo
+.venv/
+.tools/
+.cache/
+.test-data/
+.pytest_cache/
+__pycache__/
+*.py[cod]
+*.sqlite
+*.sqlite3
+*.db
+*.db-*
+*.sqlite3-*
+*.log
+.coverage
+htmlcov/
+.superpowers/

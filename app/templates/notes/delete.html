@@ -1,0 +1,5 @@
+{% extends 'base.html' %}
+{% block title %}Eliminar nota · Gestor Seguro{% endblock %}
+{% block content %}
+<section class="card form-card"><div class="card-body"><p class="eyebrow">CONFIRMACIÓN</p><h1 class="h3">¿Eliminar esta nota?</h1><p>Vas a eliminar <strong class="filename">{{ note['title'] }}</strong>. No podrás recuperarla desde la aplicación.</p><form method="post"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><div class="form-check mb-4"><input class="form-check-input" type="checkbox" name="confirm" value="yes" id="confirm" required><label class="form-check-label" for="confirm">Confirmo que deseo eliminar esta nota.</label></div><div class="form-actions"><button class="btn btn-danger" type="submit">Eliminar nota</button><a class="btn btn-outline-secondary" href="{{ url_for('notes.detail', note_id=note['id']) }}">Cancelar</a></div></form></div></section>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}{{ 'Editar nota' if note else 'Crear nota' }} · Gestor Seguro{% endblock %}
+{% block content %}
+<a class="back-link" href="{{ url_for('notes.list_notes') }}">← Volver a notas</a><p class="eyebrow mt-4">CONTENIDO CIFRADO</p><h1>{{ 'Editar nota' if note else 'Crear nota' }}</h1>
+<div class="card form-card"><div class="card-body"><form method="post">
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+<div class="mb-4"><label class="form-label" for="title">Título</label><input class="form-control" id="title" name="title" value="{{ title }}" maxlength="160" required autofocus aria-describedby="title-help"><div class="form-text" id="title-help">Hasta 160 caracteres. El título no se cifra.</div></div>
+<div class="mb-4"><label class="form-label" for="content">Contenido privado</label><textarea class="form-control note-editor" id="content" name="content" rows="12" maxlength="100000" required aria-describedby="content-help">
+{{ content }}</textarea><div class="form-text" id="content-help">Hasta 100 000 caracteres. Se guardará cifrado con un nonce nuevo.</div></div>
+<div class="form-actions"><button class="btn btn-primary" type="submit">{{ 'Guardar cambios' if note else 'Guardar nota cifrada' }}</button><a class="btn btn-outline-secondary" href="{{ url_for('notes.list_notes') }}">Cancelar</a></div>
+</form></div></div>
+{% endblock %}

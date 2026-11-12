@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Iniciar sesión · Gestor Seguro{% endblock %}
+{% block content %}
+<div class="login-layout">
+  <section class="login-intro">
+    <p class="eyebrow">TU ESPACIO PRIVADO</p>
+    <h1>Protege tus ideas.<br>Verifica tus documentos.</h1>
+    <p class="lead">Notas con cifrado autenticado y documentos con firma digital. Dos mecanismos reales, un solo lugar.</p>
+    <div class="crypto-description"><strong>AES-256-GCM</strong><span>Confidencialidad e integridad del contenido de tus notas.</span></div>
+    <div class="crypto-description"><strong>Ed25519</strong><span>Autenticidad e integridad de los archivos que firmas.</span></div>
+  </section>
+  <section class="card login-card"><div class="card-body">
+    <p class="eyebrow">ACCESO LOCAL</p><h2>Iniciar sesión</h2><p class="text-secondary">Usa el administrador creado al inicializar el proyecto.</p>
+    <form method="post">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <div class="mb-3"><label class="form-label" for="username">Usuario</label><input class="form-control" id="username" name="username" autocomplete="username" maxlength="80" required autofocus value="{{ request.form.get('username', '') }}"></div>
+      <div class="mb-4"><label class="form-label" for="password">Contraseña</label><input class="form-control" id="password" type="password" name="password" autocomplete="current-password" maxlength="256" required></div>
+      <button class="btn btn-primary w-100" type="submit">Entrar al gestor</button>
+    </form>
+    <p class="small text-secondary mt-3 mb-0">Credenciales de demostración: archivo local <code>instance/demo_credentials.txt</code>.</p>
+  </div></section>
+</div>
+{% endblock %}

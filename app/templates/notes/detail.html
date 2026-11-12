@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block title %}{{ note['title'] }} · Gestor Seguro{% endblock %}
+{% block content %}
+<a class="back-link" href="{{ url_for('notes.list_notes') }}">← Volver a notas</a>
+<div class="page-heading mt-4"><div><p class="eyebrow">NOTA PRIVADA</p><h1 class="filename">{{ note['title'] }}</h1><p class="text-secondary small">Actualizada: {{ note['updated_at'] }} UTC · <span class="badge crypto-badge">AES-256-GCM</span></p></div><div class="form-actions"><a class="btn btn-outline-secondary" href="{{ url_for('notes.edit', note_id=note['id']) }}">Editar nota</a><a class="btn btn-outline-danger" href="{{ url_for('notes.delete', note_id=note['id']) }}">Eliminar</a></div></div>
+<article class="card"><div class="card-body"><div class="note-content">{{ content }}</div></div></article>
+<p class="small text-secondary mt-3">Contenido descifrado en el servidor para esta consulta autorizada. En SQLite permanece cifrado.</p>
+{% endblock %}

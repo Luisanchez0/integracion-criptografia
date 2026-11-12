@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Gestor Seguro{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='vendor/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+</head>
+<body>
+  <a class="visually-hidden-focusable skip-link" href="#contenido">Saltar al contenido</a>
+  <header class="site-header">
+    <nav class="container app-nav" aria-label="Navegación principal">
+      <a class="brand" href="{{ url_for('dashboard') if g.user else url_for('auth.login') }}"> Caso Practico: Criptografia </a>
+      {% if g.user %}
+      <form method="post" action="{{ url_for('auth.logout') }}" class="logout-form">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <span class="user-name">{{ g.user['username'] }}</span><button class="btn btn-outline-secondary btn-sm" type="submit">Cerrar sesión</button>
+      </form>
+      {% endif %}
+    </nav>
+  </header>
+  <main id="contenido" class="container main-content" tabindex="-1">
+    {% for category, message in get_flashed_messages(with_categories=true) %}
+      <div class="alert alert-{{ category }}" role="status">{{ message }}</div>
+    {% endfor %}
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>
